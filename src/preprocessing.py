@@ -35,7 +35,7 @@ def clean_ckd_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         cleaned[numeric_cols] = cleaned[numeric_cols].fillna(cleaned[numeric_cols].median())
 
     for col in categorical_cols:
-        mode = cleaned[col].mode(dropna=True)
+        mode = cleaned[col].mode()
         fill_value = mode.iloc[0] if not mode.empty else "unknown"
         cleaned[col] = cleaned[col].fillna(fill_value)
 
