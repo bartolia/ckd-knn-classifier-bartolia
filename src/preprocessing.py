@@ -24,7 +24,7 @@ def clean_ckd_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     cleaned = cleaned.replace("?", np.nan)
 
     for col in cleaned.select_dtypes(include="object"):
-        cleaned[col] = cleaned[col].astype(str).str.strip().replace("nan", np.nan)
+        cleaned[col] = cleaned[col].map(lambda value: value.strip() if isinstance(value, str) else value)
 
     for col in cleaned.columns:
         cleaned[col] = pd.to_numeric(cleaned[col], errors="ignore")
@@ -55,5 +55,5 @@ def prepare_features_and_target(df: pd.DataFrame, target_col: str = "classificat
         unknown = sorted(target[y.isna()].unique())
         raise ValueError(f"Unsupported target labels: {unknown}")
 
-    X = pd.get_dummies(df.drop(columns=[target_col]), drop_first=False)
+    X = pd.get_dummies(df.drop(columns=[target_col]), drop_first=True)
     return X, y.astype(int)
