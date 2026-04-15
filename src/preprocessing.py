@@ -23,7 +23,7 @@ def clean_ckd_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     cleaned = cleaned.replace("?", np.nan)
 
     for col in cleaned.select_dtypes(include="object"):
-        cleaned[col] = cleaned[col].map(lambda value: value.strip() if isinstance(value, str) else value)
+        cleaned[col] = cleaned[col].str.strip()
 
     for col in cleaned.columns:
         cleaned[col] = pd.to_numeric(cleaned[col], errors="ignore")
@@ -31,8 +31,7 @@ def clean_ckd_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     numeric_cols = cleaned.select_dtypes(include=np.number).columns
     categorical_cols = cleaned.columns.difference(numeric_cols)
 
-    if len(numeric_cols) > 0:
-        cleaned[numeric_cols] = cleaned[numeric_cols].fillna(cleaned[numeric_cols].median())
+    cleaned[numeric_cols] = cleaned[numeric_cols].fillna(cleaned[numeric_cols].median())
 
     for col in categorical_cols:
         mode = cleaned[col].mode()
