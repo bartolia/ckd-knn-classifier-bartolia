@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Tuple
 
 import numpy as np
 import pandas as pd
@@ -43,7 +42,7 @@ def clean_ckd_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     return cleaned
 
 
-def prepare_features_and_target(df: pd.DataFrame, target_col: str = "classification") -> Tuple[pd.DataFrame, pd.Series]:
+def prepare_features_and_target(df: pd.DataFrame, target_col: str = "classification") -> tuple[pd.DataFrame, pd.Series]:
     """Split a cleaned DataFrame into model features and numeric target labels."""
     if target_col not in df.columns:
         raise ValueError(f"Target column '{target_col}' not found in DataFrame")
