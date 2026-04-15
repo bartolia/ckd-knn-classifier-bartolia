@@ -31,3 +31,7 @@ The starter notebook includes:
 - Performance evaluation with accuracy
 - Confusion matrix visualization
 - Plot of KNN grid search results
+
+## AI Usage:
+
+I used AI tools such as ChatGPT and GitHub Copilot to help debug errors, structure parts of the code, and suggest improvements to the workflow. However, I reviewed and tested all generated code myself before using it. I did not rely on AI outputs blindly, and I made sure I understood the logic behind the model and preprocessing steps. AI was mainly used to speed up troubleshooting and setup, not to replace my own decision making
