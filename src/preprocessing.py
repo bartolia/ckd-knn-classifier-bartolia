@@ -26,7 +26,8 @@ def clean_ckd_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         cleaned[col] = cleaned[col].str.strip()
 
     for col in cleaned.columns:
-        cleaned[col] = pd.to_numeric(cleaned[col], errors="ignore")
+        if col not in ['classification', 'class']:
+            cleaned[col] = pd.to_numeric(cleaned[col], errors="coerce")
 
     numeric_cols = cleaned.select_dtypes(include=np.number).columns
     categorical_cols = cleaned.columns.difference(numeric_cols)
